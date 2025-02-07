@@ -1,37 +1,41 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Movie table</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.2/papaparse.min.js"></script>
 </head>
 <body>
-    <header>
-      <h1>Личный сайт</h1>
-      <p>Который сделан на основе готового шаблона</p>
-      <nav>
-      </nav>
-    </header>
-    <main>
-      <article>
-        <section>
-          <h2>Первая секция</h2>
-          <p>Она обо мне</p>
-          <p>Но может быть и о семантике, я пока не решил.</p>
-        </section>
-        <section>
-          <h2>Вторая секция</h2>
-          <p>Она тоже обо мне</p>
-        </section>
-        <section>
-          <h2>И третья</h2>
-          <p>Вы уже должны были начать догадываться.</p>
-        </section>
-      </article>
-    </main>
-    <footer>
-      <p>Сюда бы я вписал информацию об авторе и ссылки на другие сайты</p>
-    </footer>
-    <!-- сюда можно подключить jquery <script src="scripts/app.js" defer></script> -->
-  </body>
-  </html>
+  <table id="csv-table"></table>
+
+  <script>
+    Papa.parse("movie_table.csv", {
+      download: true,
+      header: true,
+      complete: function(results) {
+        var data = results.data;
+        var table = document.getElementById("csv-table");
+
+        // Создаем заголовки таблицы
+        var tr = document.createElement("tr");
+        for (var key in data[0]) {
+          var th = document.createElement("th");
+          th.textContent = key;
+          tr.appendChild(th);
+        }
+        table.appendChild(tr);
+
+        // Заполняем таблицу данными
+        data.forEach(function(row) {
+          tr = document.createElement("tr");
+          for (var key in row) {
+            var td = document.createElement("td");
+            td.textContent = row[key];
+            tr.appendChild(td);
+          }
+          table.appendChild(tr);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

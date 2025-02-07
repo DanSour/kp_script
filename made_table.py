@@ -22,21 +22,25 @@ def mov_processing(line):
             # print('фильм не найден')
             # print()
             with open(movies_table, 'a', encoding='utf-8') as file:
-                file.write(f'| {movie} | -- | -- | -- | -- |' + '\n')
+                file.write(f'| {movie} | -- | -- | -- | -- | -- |' + '\n')
                 file.close
 
             return
-        mov_vars = vars(film_data[0])
+        # mov_vars = vars(film_data)
+        mov_vars = film_data
 
-        keys_to_keep = ["title", "year", "genres", "rating", "runtime"]
+        keys_to_keep = ["nameRu", "posterUrl", "year", "genres", "rating", "filmLength"]
         mov_vars = {k: v for k, v in mov_vars.items() if k in keys_to_keep} 
-        try:
-            mov_vars['posters'] = f'<img src={mov_vars["posters"][0]} alt="img" width="100" />'
-        except Exception as e:
-            pass
-        mov_vars['runtime'] = f"{mov_vars['runtime']// 60}:{mov_vars['runtime']%60:02}"
+
+        # mov_vars['genres'] = [genre['genre'] for genre in mov_vars['genres']]
+        mov_vars['genres'] = mov_vars['genres'].apply(lambda x: ', '.join([item['genre'] for item in x]))
+
+        # try:
+        mov_vars['posterUrl'] = f'<img src={mov_vars["posterUrl"]} alt="img" width="100" />'
+        # except Exception as e:
+            # pass
         
-        mov_data = pd.DataFrame([mov_vars])
+        mov_data = pd.DataFrame([mov_vars], columns=keys_to_keep)
         mov_data = mov_data.to_markdown(index=False)
         mov_data = mov_data.split('\n')[2:]
         mov_data = mov_data[0]
@@ -50,8 +54,8 @@ def mov_processing(line):
 
 def main():
     with open(movies_table, 'w', encoding='utf-8') as file:
-        file.write('| Название | Год | Жанр | Рейтинг | Время | ' + '\n' + 
-                   '| -- | -- | -- | -- | -- | ' + '\n')
+        file.write('| nameRu | year | filmLength | genres | rating | posterUrl | ' + '\n' + 
+                   '| -- | -- | -- | -- | -- | -- |' + '\n')
         file.close
 
     with open(movies_file, 'r', encoding='utf-8') as file:
