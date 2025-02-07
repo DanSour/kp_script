@@ -1,0 +1,29 @@
+{
+    "filmId": 301,
+    "nameRu": "Матрица",
+    "nameEn": "The Matrix",
+    "type": "FILM",
+    "year": "1999",
+    "description": "Жизнь Томаса Андерсона разделена на две части: днём он — самый обычный офисный работник, получающий нагоняи от начальства, а ночью превращается в хакера по имени Нео, и нет места в сети, куда он бы не смог проникнуть. Но однажды всё меняется. Томас узнаёт ужасающую правду о реальности.",
+    "filmLength": "02:16",
+    "countries": [
+        {
+            "country": "Австралия"
+        },
+        {
+            "country": "США"
+        }
+    ],
+    "genres": [
+        {
+            "genre": "боевик"
+        },
+        {
+            "genre": "фантастика"
+        }
+    ],
+    "rating": "8.5",
+    "ratingVoteCount": 750100,
+    "posterUrl": "https://kinopoiskapiunofficial.tech/images/posters/kp/301.jpg",
+    "posterUrlPreview": "https://kinopoiskapiunofficial.tech/images/posters/kp_small/301.jpg"
+}
