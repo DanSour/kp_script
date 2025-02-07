@@ -4,6 +4,13 @@
   <title>Movie table</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.2.0/papaparse.min.js"></script>
 
+<select id="genreSelect">
+  <option value="">Все</option>
+  <option value="Фантастика">Фантастика</option>
+  <option value="Драма">Драма</option>
+  <option value="Комедия">Комедия</option>
+</select>
+
 </head>
 <body>
   <table id="csv-table"></table>
@@ -44,6 +51,21 @@
         });
       }
     });
+    
+document.getElementById('genreSelect').addEventListener('change', function() {
+        const selectedGenre = this.value;
+        const rows = document.querySelectorAll('#csv-table tr');
+
+        rows.forEach(row => {
+            const genreCell = row.cells[1].textContent; // Предполагаем, что жанр находится во второй колонке
+            if (selectedGenre === "" || genreCell === selectedGenre) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
   </script>
 </body>
 </html>
+
