@@ -6,9 +6,9 @@
 
 <select id="genreSelect">
   <option value="">Все</option>
-  <option value="Фантастика">Фантастика</option>
-  <option value="Драма">Драма</option>
-  <option value="Комедия">Комедия</option>
+  <option value="Фильм">Фильм</option>
+  <option value="Аниме">Аниме</option>
+  <option value="Сериал">Сериал</option>
 </select>
 
 </head>
@@ -51,13 +51,13 @@
         });
       }
     });
-    
+
 document.getElementById('genreSelect').addEventListener('change', function() {
         const selectedGenre = this.value;
         const rows = document.querySelectorAll('#csv-table tr');
 
         rows.forEach(row => {
-            const genreCell = row.cells[1].textContent; // Предполагаем, что жанр находится во второй колонке
+            const genreCell = row.cells[6].textContent; // Предполагаем, что жанр находится во второй колонке
             if (selectedGenre === "" || genreCell === selectedGenre) {
                 row.style.display = '';
             } else {
